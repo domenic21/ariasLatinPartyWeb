@@ -33,6 +33,7 @@ const content = {
         { label: "Services", href: "#services" },
         { label: "Gallery", href: "#gallery" },
         { label: "Contact", href: "#contact" },
+        { label: "Socials", href: "https://www.ariaslatinparty.com/linktree" },
       ],
       cta: { label: "BOOK NOW", href: "#contact" },
     },
@@ -42,8 +43,9 @@ const content = {
       titleLines: ["DJ", "EDY", "SERRANO"],
       subtitle:
         "30+ years of experience in Ecuador, now offerering services across NY - NJ and on request many other states across the US. ",
-      primaryCta: { label: "View Services", href: "#services" },
+      primaryCta: { label: "Social Media", href: "https://www.ariaslatinparty.com/linktree" },
       secondaryCta: { label: "Contact Us", href: "#contact" },
+    
     },
 
     services: {
@@ -195,6 +197,7 @@ const content = {
         { label: "Servicios", href: "#services" },
         { label: "Galería", href: "#gallery" },
         { label: "Contacto", href: "#contact" },
+        { label: "Redes Sociales", href: "https://www.ariaslatinparty.com/linktree" },
       ],
       cta: { label: "RESERVAR", href: "#contact" },
     },
@@ -284,12 +287,12 @@ const content = {
     },
 
     cta: {
-      titleLines: ["Contáctanos"],
+      titleLines: ["Contácto"],
       body: "Las fechas para la temporada 2026 se están llenando rápido. Asegura tu lugar ahora.",
       phones: ["(201) 898-7592", "(201) 554-4914"],
       serviceArea: "NJ Y TRI-STATE",
       labels: { access: "ACCESO DIRECTO", hq: "SEDE DE SERVICIO" },
-      button: { label: "ENVIAR CONSULTA", href: "mailto:booking@edisonarias.com" },
+      button: { label: "ENVIAR CONSULTA", href: "mailto:fdarias21@gmail.com" },
     },
 
     footer: {
