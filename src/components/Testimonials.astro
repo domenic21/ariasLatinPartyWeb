@@ -1,0 +1,39 @@
+---
+/* ============================================================
+   TESTIMONIALS  ("VOICES FROM THE RUMBA")
+   Content comes from: src/data/site.ts -> `testimonials`
+   ============================================================ */
+import { getContent } from "../data/site";
+const { testimonials } = getContent(Astro.currentLocale);
+---
+
+<section id="gallery" class="border-y border-white/5 bg-ink-soft/40 py-28">
+  <div class="mx-auto max-w-7xl px-6">
+    <h2 class="text-center font-display text-4xl font-black italic sm:text-5xl">
+      {testimonials.title}
+    </h2>
+
+    {/* Three quote cards */}
+    <div class="mt-14 grid gap-5 md:grid-cols-3">
+      {
+        testimonials.items.map((t) => (
+          <figure class="rounded-2xl border border-white/10 bg-ink p-7">
+            <blockquote class="text-sm italic text-white/80">
+              “{t.quote}”
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3">
+              {/* Colored avatar circle (initials would go here) */}
+              <span class="h-10 w-10 rounded-full bg-gradient-to-br from-neon-violet to-neon-blue" />
+              <div>
+                <div class="text-sm font-semibold">{t.author}</div>
+                <div class="text-xs tracking-widest text-white/40">
+                  {t.role}
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>

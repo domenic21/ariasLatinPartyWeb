@@ -1,0 +1,87 @@
+---
+/* ============================================================
+   HERO  (first screen)
+   Layout (desktop):  [ text on the LEFT ]   [ 3D console on the RIGHT ]
+   Layout (mobile):   text stacked on top, 3D console below.
+   Background:        the ARIAS logo as a large faint watermark.
+
+   Content comes from: src/data/site.ts -> `hero`
+   3D element comes from: src/components/three/HeroScene.jsx
+   Logo watermark:    /public/images/logo.png
+   ============================================================ */
+import { getContent } from "../data/site";
+import HeroScene from "./three/HeroScene.jsx";
+const { hero } = getContent(Astro.currentLocale);
+---
+
+<section
+  id="top"
+  class="relative flex min-h-screen items-center overflow-hidden px-6 pt-28 pb-12 sm:pt-24"
+>
+  {/* ---- BACKGROUND LOGO WATERMARK ----
+       Sits furthest back (-z-10), centered, faint and slightly blurred.
+       Scales with the viewport (w-[90%] caps it on big screens). */}
+  <img
+    src="/images/logo.png"
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute left-1/2 top-1/2 -z-10 w-[120%] max-w-[900px] -translate-x-1/2 -translate-y-1/2 opacity-[0.06] blur-[1px] sm:w-[80%]"
+  />
+
+  {/* ---- MAIN GRID ----
+       1 column on mobile, 2 columns from `lg` (large screens) up. */}
+  <div
+    class="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 lg:grid-cols-2"
+  >
+    {/* ===== LEFT: hero text ===== */}
+    <div class="order-2 text-center lg:order-1 lg:text-left">
+      <p class="mb-4 text-xs font-semibold tracking-[0.3em] text-neon-blue sm:text-sm">
+        {hero.badge}
+      </p>
+
+      {/* Headline (DJ Edy Serrano): Nosifer display font.
+          Middle line gets the neon-blue gradient. Nosifer is dense/tall,
+          so sizes are a bit smaller with extra line spacing. */}
+      <h1 class="font-graffiti text-4xl leading-[1.35] sm:text-6xl xl:text-7xl">
+        {
+          hero.titleLines.map((line, i) => (
+            <span class={`block ${i === 1 ? "text-gradient" : "text-white"}`}>
+              {line}
+            </span>
+          ))
+        }
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-md text-sm text-white/70 sm:text-base lg:mx-0">
+        {hero.subtitle}
+      </p>
+
+      {/* Buttons: centered on mobile, left-aligned on desktop */}
+      <div class="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
+        <a
+          href={hero.primaryCta.href}
+          class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white/90 sm:px-7"
+        >
+          {hero.primaryCta.label}
+        </a>
+        <a
+          href={hero.secondaryCta.href}
+          class="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10 sm:px-7"
+        >
+          {hero.secondaryCta.label}
+        </a>
+      </div>
+    </div>
+
+    {/* ===== RIGHT: floating 3D DJ console (zoomed in) =====
+         client:only="react" => render ONLY in the browser (Three.js needs WebGL).
+         Heights are responsive so it never dominates a phone screen:
+           mobile  -> 320px,  small -> 420px,  large -> 560px.
+         The `animate-float` class gives it a gentle floating bob. */}
+    <div class="order-1 lg:order-2">
+      <div class="animate-float h-[320px] w-full sm:h-[420px] lg:h-[560px]">
+        <HeroScene client:only="react" />
+      </div>
+    </div>
+  </div>
+</section>

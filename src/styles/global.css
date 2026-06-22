@@ -1,0 +1,139 @@
+/* ============================================================
+   GLOBAL STYLES
+   This single import pulls in all of Tailwind v4.
+   Below it we define our own design tokens (brand colors, fonts)
+   using Tailwind v4's @theme block — these become usable as
+   utility classes, e.g. `text-neon-blue`, `bg-ink`.
+   ============================================================ */
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette taken from the design mockups (dark + neon) */
+  --color-ink: #0a0a0b;          /* near-black page background */
+  --color-ink-soft: #131316;     /* slightly lighter panels/cards */
+  --color-neon-blue: #6ea8ff;    /* electric blue accent */
+  --color-neon-pink: #ff7ce5;    /* pink/magenta accent (gradients) */
+  --color-neon-violet: #b388ff;  /* violet accent */
+
+  /* Ecuador flag colors (used for scroll bar + subtle background) */
+  --color-ec-yellow: #ffdd00;
+  --color-ec-blue: #034ea2;
+  --color-ec-red: #ed1c24;
+
+  /* Display font for big headings (loaded in Layout.astro) */
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  /* Display font for the hero name (Nosifer — loaded in Layout.astro) */
+  --font-graffiti: "Nosifer", system-ui, cursive;
+}
+
+/* Smooth scrolling for the anchor nav links */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: white;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  /* Prevent any wide element (background watermarks, 3D canvas) from
+     creating a horizontal scrollbar on mobile. */
+  overflow-x: hidden;
+  position: relative;
+
+  /* ---- GENERAL BACKGROUND TEXTURE ----
+     The honeycomb speaker-grille image (Roadie/background.png), tiled and
+     fixed in place. A dark overlay on top keeps it subtle so text stays
+     readable. The Ecuador color wash (body::before) layers above this. */
+  background-color: var(--color-ink);
+  background-image:
+    linear-gradient(rgba(10, 10, 11, 0.82), rgba(10, 10, 11, 0.82)),
+    url("/images/background.png");
+  background-repeat: no-repeat, repeat;
+  background-size: cover, 360px auto;
+  background-attachment: fixed, fixed;
+}
+
+/* ---- SUBTLE ECUADOR-FLAG BACKGROUND ----
+   A faint, fixed wash of yellow/blue/red behind everything. Very low
+   opacity so it reads as a mood, not a flag. Sits behind all content. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -20;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 15% 0%, color-mix(in srgb, var(--color-ec-yellow) 100%, transparent) 0%, transparent 70%),
+    radial-gradient(60% 60% at 85% 30%, color-mix(in srgb, var(--color-ec-blue) 100%, transparent) 0%, transparent 70%),
+    radial-gradient(70% 60% at 50% 100%, color-mix(in srgb, var(--color-ec-red) 100%, transparent) 0%, transparent 70%);
+  opacity: 0.08;
+}
+
+/* ---- ECUADOR-FLAG SCROLLBAR ----
+   Themed scrollbar for browsers that support it. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ec-blue) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    var(--color-ec-yellow),
+    var(--color-ec-blue),
+    var(--color-ec-red)
+  );
+  border-radius: 999px;
+  border: 2px solid var(--color-ink);
+}
+
+/* ---- SCROLL PROGRESS BAR (top of page) ----
+   The width is driven by a tiny script in Layout.astro. */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  z-index: 100;
+  background: linear-gradient(
+    90deg,
+    var(--color-ec-yellow) 0%,
+    var(--color-ec-yellow) 40%,
+    var(--color-ec-blue) 50%,
+    var(--color-ec-blue) 70%,
+    var(--color-ec-red) 80%,
+    var(--color-ec-red) 100%
+  );
+}
+
+/* Gentle floating bob for the 3D console wrapper (used in Hero.astro).
+   Respects users who prefer reduced motion. */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-float { animation: none; }
+}
+
+/* Reusable gradient text effect (EL / SABOR / INFINITO style) */
+.text-gradient {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-neon-violet),
+    var(--color-neon-pink),
+    var(--color-neon-blue)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

@@ -1,0 +1,56 @@
+---
+/* ============================================================
+   ABOUT  ("THE LEGEND" — 30+ years bio)
+   Content comes from: src/data/site.ts -> `about`
+   The circular photo uses an image from /public/images/
+   (drop your favorite photo there, named dj.jpg).
+   ============================================================ */
+import { getContent } from "../data/site";
+const { about } = getContent(Astro.currentLocale);
+---
+
+<section id="about" class="mx-auto max-w-7xl px-6 py-28">
+  <div class="grid items-center gap-12 md:grid-cols-2">
+    {/* Left: circular photo with the "30+ years" badge overlay */}
+    <div class="relative mx-auto">
+      <div
+        class="relative h-72 w-72 overflow-hidden rounded-full border border-white/10 bg-ink-soft sm:h-80 sm:w-80"
+      >
+        {/* Replace /images/dj.jpg with your photo. If missing, the gradient shows. */}
+        <img
+          src="/images/dj.jpg"
+          alt="Edison Arias"
+          class="h-full w-full object-cover"
+          onerror="this.style.display='none'"
+        />
+        <div
+          class="absolute inset-0 bg-linear-to-br from-neon-violet/30 via-transparent to-neon-blue/30"
+        >
+        </div>
+      </div>
+      {/* Years badge */}
+      <div
+        class="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-ink px-6 py-3 text-center shadow-lg"
+      >
+        <div class="font-display text-2xl font-black text-neon-blue">
+          {about.yearsBadge.value}
+        </div>
+        <div class="text-[10px] tracking-widest text-white/50">
+          {about.yearsBadge.label}
+        </div>
+      </div>
+    </div>
+
+    {/* Right: name + bio text */}
+    <div>
+      <p class="text-sm font-semibold tracking-[0.3em] text-white/40">
+        {about.eyebrow}
+      </p>
+      <h2 class="mt-2 font-display text-6xl font-black italic leading-none">
+        <span class="block">{about.name.first}</span>
+        <span class="block text-gradient">{about.name.last}</span>
+      </h2>
+      <p class="mt-6 max-w-md text-white/70">{about.body}</p>
+    </div>
+  </div>
+</section>

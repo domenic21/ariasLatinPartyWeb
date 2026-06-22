@@ -1,0 +1,50 @@
+---
+/* ============================================================
+   FOOTER
+   Content comes from: src/data/site.ts -> `footer`
+   ============================================================ */
+import { getContent, shared } from "../data/site";
+const { footer } = getContent(Astro.currentLocale);
+---
+
+<footer class="border-t border-white/5 px-6 py-10">
+  <div
+    class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4"
+  >
+    <span class="font-display text-lg font-extrabold italic">
+      {footer.brand}
+    </span>
+
+    <div class="flex gap-6">
+      {
+        footer.links.map((link) => (
+          <a
+            href={link.href}
+            class="text-xs tracking-widest text-white/40 transition hover:text-white"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <span class="text-xs text-white/30">{footer.copyright}</span>
+  </div>
+
+  {/* 3D model attributions — required by the Creative Commons licenses */}
+  <div class="mx-auto mt-6 max-w-7xl space-y-1 text-center text-[10px] text-white/25">
+    {
+      shared.attributions.map((credit) => (
+        <p>
+          <a href={credit.modelUrl} target="_blank" rel="noopener" class="hover:text-white/50">
+            {credit.text}
+          </a>
+          {" · "}
+          <a href={credit.licenseUrl} target="_blank" rel="noopener" class="hover:text-white/50">
+            License
+          </a>
+        </p>
+      ))
+    }
+  </div>
+</footer>

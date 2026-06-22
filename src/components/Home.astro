@@ -1,0 +1,32 @@
+---
+/* ============================================================
+   HOME  (shared homepage body)
+   Used by BOTH language routes:
+     - src/pages/index.astro      -> English ("/")
+     - src/pages/es/index.astro   -> Spanish ("/es/")
+   Each section reads its own text via Astro.currentLocale, so
+   this same file renders correctly in either language.
+   ============================================================ */
+import Layout from "../layouts/Layout.astro";
+import Navbar from "./Navbar.astro";
+import Hero from "./Hero.astro";
+import Services from "./Services.astro";
+import About from "./About.astro";
+import Gallery from "./Gallery.astro";
+import FAQ from "./FAQ.astro";
+import CTA from "./CTA.astro";
+import Footer from "./Footer.astro";
+---
+
+<Layout>
+  <Navbar />
+  <main>
+    <Hero />
+    <Services />
+    <About />
+    <Gallery />
+    <FAQ />
+    <CTA />
+  </main>
+  <Footer />
+</Layout>

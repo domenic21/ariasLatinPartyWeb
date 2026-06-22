@@ -1,0 +1,42 @@
+---
+/* ============================================================
+   CTA  (final "READY FOR THE IMPACT?" booking block)
+   Content comes from: src/data/site.ts -> `cta`
+   ============================================================ */
+import { getContent } from "../data/site";
+const { cta } = getContent(Astro.currentLocale);
+---
+
+<section id="contact" class="mx-auto max-w-5xl px-6 py-28">
+  <div
+    class="rounded-3xl border border-white/10 bg-ink-soft p-12 text-center sm:p-16"
+  >
+    <h2 class="font-display text-5xl font-black italic sm:text-6xl">
+      <span class="block">{cta.titleLines[0]}</span>
+      <span class="block text-gradient">{cta.titleLines[1]}</span>
+    </h2>
+
+    <p class="mx-auto mt-5 max-w-md text-sm text-white/60">{cta.body}</p>
+
+    {/* Phone numbers + service area */}
+    <div
+      class="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-left"
+    >
+      <div>
+        <div class="text-xs tracking-widest text-white/40">{cta.labels.access}</div>
+        {cta.phones.map((p) => <div class="font-display text-xl font-bold">{p}</div>)}
+      </div>
+      <div>
+        <div class="text-xs tracking-widest text-white/40">{cta.labels.hq}</div>
+        <div class="font-display text-xl font-bold">{cta.serviceArea}</div>
+      </div>
+    </div>
+
+    <a
+      href={cta.button.href}
+      class="mt-10 inline-block rounded-full bg-white px-8 py-4 text-sm font-semibold text-ink transition hover:bg-white/90"
+    >
+      {cta.button.label}
+    </a>
+  </div>
+</section>

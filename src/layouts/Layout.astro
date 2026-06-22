@@ -1,0 +1,145 @@
+---
+/* ============================================================
+   BASE LAYOUT  (+ all SEO and AI-search optimization)
+   ------------------------------------------------------------
+   Wraps every page. The <head> here contains:
+     1. Standard SEO meta (title, description, canonical)
+     2. Open Graph + Twitter cards (rich social/chat previews)
+     3. JSON-LD structured data (how Google AND AI engines —
+        ChatGPT, Perplexity, AI Overviews — understand the site)
+   All values come from src/data/site.ts -> `seo`.
+   ============================================================ */
+import "../styles/global.css";
+import { getContent, shared } from "../data/site";
+
+// Pick language from the URL (Astro.currentLocale). Fall back to English.
+const lang = Astro.currentLocale ?? "en";
+const { seo } = getContent(lang);
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = seo.title, description = seo.description } = Astro.props;
+
+// Build absolute URLs (required by Open Graph + canonical).
+// Astro.site comes from `site:` in astro.config.mjs.
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(shared.ogImage, Astro.site);
+
+/* ---- STRUCTURED DATA (JSON-LD) ----
+   Three schemas, combined into one @graph:
+   - LocalBusiness: tells engines this is a real, locatable service.
+   - Person: establishes Edison Arias as the founder/expert (E-E-A-T).
+   - FAQPage: lets Google + AI engines pull direct Q&A answers.
+   This is the single biggest lever for AI-engine visibility. */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "MusicGroup"],
+      "@id": `${Astro.site}#business`,
+      name: shared.business.name,
+      description: seo.description,
+      url: Astro.site?.toString(),
+      telephone: shared.business.phone,
+      email: shared.business.email,
+      image: ogImageURL.toString(),
+      priceRange: shared.business.priceRange,
+      areaServed: shared.business.areaServed,
+      founder: { "@id": `${Astro.site}#founder` },
+      sameAs: shared.business.sameAs,
+    },
+    {
+      "@type": "Person",
+      "@id": `${Astro.site}#founder`,
+      name: shared.business.founderName,
+      jobTitle: "DJ & Sound Engineer",
+      worksFor: { "@id": `${Astro.site}#business` },
+      knowsAbout: [
+        "Latin Music",
+        "DJ Performance",
+        "Live Sound Engineering",
+        "Hora Loca Productions",
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${Astro.site}#faq`,
+      mainEntity: seo.faq.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {/* ---- Primary SEO meta ---- */}
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={seo.keywords} />
+    <meta name="author" content={shared.business.founderName} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+
+    {/* ---- Open Graph (Facebook, LinkedIn, iMessage, WhatsApp, etc.) ---- */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={shared.business.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />
+
+    {/* ---- Twitter / X card ---- */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    {/* ---- Structured data for Google + AI engines ---- */}
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(jsonLd)}
+    />
+
+    {/* Fonts: Archivo (headings) + Inter (body) */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400..900;1,700&family=Inter:wght@400;500;600&family=Nosifer&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    {/* Ecuador-flag scroll progress bar (fills as you scroll down) */}
+    <div id="scroll-progress"></div>
+
+    <slot />
+
+    <script is:inline>
+      // Update the progress bar width based on how far the page is scrolled.
+      (function () {
+        const bar = document.getElementById("scroll-progress");
+        function update() {
+          const h = document.documentElement;
+          const scrolled = h.scrollTop;
+          const max = h.scrollHeight - h.clientHeight;
+          bar.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + "%";
+        }
+        window.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update);
+        update();
+      })();
+    </script>
+  </body>
+</html>

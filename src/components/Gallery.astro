@@ -1,0 +1,101 @@
+---
+/* ============================================================
+   GALLERY  (horizontal scroll carousel)
+   ------------------------------------------------------------
+   Replaces the old Testimonials section. A row of photos you
+   scroll/swipe sideways — works with touch (mobile), trackpad,
+   and the arrow buttons (desktop).
+
+   Text comes from:   src/data/site.ts -> `gallery`  (bilingual)
+   Photos come from:  src/data/site.ts -> shared.galleryImages
+   👉 To add photos: drop files in public/images/gallery/ and
+      list them in shared.galleryImages.
+   ============================================================ */
+import { getContent, shared } from "../data/site";
+const { gallery } = getContent(Astro.currentLocale);
+const images = shared.galleryImages;
+---
+
+<section
+  id="gallery"
+  class="border-y border-white/5 bg-ink-soft/40 py-24"
+>
+  <div class="mx-auto max-w-7xl px-6">
+    {/* Heading row + scroll buttons */}
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="text-sm font-semibold tracking-[0.3em] text-white/40">
+          {gallery.eyebrow}
+        </p>
+        <h2 class="mt-2 font-display text-4xl font-black italic sm:text-5xl">
+          {gallery.title}
+        </h2>
+        <p class="mt-2 max-w-sm text-sm text-white/60">{gallery.intro}</p>
+      </div>
+
+      {/* Desktop scroll buttons (hidden on touch-first small screens) */}
+      <div class="hidden gap-2 sm:flex">
+        <button
+          type="button"
+          data-scroll="prev"
+          aria-label="Previous"
+          class="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-white/70 transition hover:bg-white/10"
+        >
+          ‹
+        </button>
+        <button
+          type="button"
+          data-scroll="next"
+          aria-label="Next"
+          class="grid h-11 w-11 place-items-center rounded-full border border-white/15 text-white/70 transition hover:bg-white/10"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* ---- THE CAROUSEL ----
+       overflow-x-auto = horizontal scroll. snap-x = each photo snaps
+       into place as you swipe. The negative/positive padding keeps the
+       first/last image aligned to the page edge nicely. */}
+  <div
+    id="gallery-track"
+    class="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+  >
+    {
+      images.map((src, i) => (
+        <a
+          href={src}
+          target="_blank"
+          rel="noopener"
+          class="group relative aspect-[3/4] w-64 flex-none snap-start overflow-hidden rounded-2xl border border-white/10 sm:w-72"
+        >
+          <img
+            src={src}
+            alt={`${gallery.title} — ${i + 1}`}
+            loading="lazy"
+            class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          />
+          {/* Subtle gradient so the photos feel part of the dark theme */}
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent" />
+        </a>
+      ))
+    }
+  </div>
+</section>
+
+<script is:inline>
+  // Arrow buttons: scroll the track by roughly one card width.
+  (function () {
+    const track = document.getElementById("gallery-track");
+    if (!track) return;
+    const amount = 300; // px per click (~one card)
+    document.querySelectorAll("[data-scroll]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const dir = btn.getAttribute("data-scroll") === "next" ? 1 : -1;
+        track.scrollBy({ left: dir * amount, behavior: "smooth" });
+      });
+    });
+  })();
+</script>
