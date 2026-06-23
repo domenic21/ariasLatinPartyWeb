@@ -67,7 +67,8 @@ export const POST: APIRoute = async ({ request }) => {
   const message = String(body.message ?? "").trim();
 
   // Server-side validation (never trust the client).
-  if (!date) return json({ ok: false, error: "Missing date." }, 400);
+  // `date` is optional: the calendar form sends one, the general
+  // "Send inquiry" modal does not.
   if (!name) return json({ ok: false, error: "Missing name." }, 400);
   if (!isEmail(email)) return json({ ok: false, error: "Invalid email." }, 400);
 
@@ -82,11 +83,13 @@ export const POST: APIRoute = async ({ request }) => {
       from,
       to,
       replyTo: email, // replying goes straight to the requester
-      subject: `New date request: ${date}${eventType ? ` — ${eventType}` : ""}`,
+      subject: date
+        ? `New date request: ${date}${eventType ? ` — ${eventType}` : ""}`
+        : `New inquiry from ${name}`,
       html: `
-        <h2>New event date request</h2>
+        <h2>${date ? "New event date request" : "New website inquiry"}</h2>
         <table style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
-          <tr><td style="padding:4px 12px 4px 0"><strong>Requested date</strong></td><td>${esc(date)}</td></tr>
+          ${date ? `<tr><td style="padding:4px 12px 4px 0"><strong>Requested date</strong></td><td>${esc(date)}</td></tr>` : ""}
           <tr><td style="padding:4px 12px 4px 0"><strong>Name</strong></td><td>${esc(name)}</td></tr>
           <tr><td style="padding:4px 12px 4px 0"><strong>Email</strong></td><td>${esc(email)}</td></tr>
           <tr><td style="padding:4px 12px 4px 0"><strong>Phone</strong></td><td>${esc(phone) || "—"}</td></tr>

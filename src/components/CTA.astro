@@ -5,8 +5,9 @@
    ============================================================ */
 import { getContent } from "../data/site";
 import BookingForm from "./BookingForm.jsx";
+import ContactModal from "./ContactModal.jsx";
 const lang = Astro.currentLocale ?? "en";
-const { cta, booking } = getContent(lang);
+const { cta, booking, contact } = getContent(lang);
 ---
 
 <section id="contact" class="mx-auto max-w-5xl px-6 py-28">
@@ -34,12 +35,12 @@ const { cta, booking } = getContent(lang);
       </div>
     </div>
 
-    <a
-      href={cta.button.href}
-      class="mt-10 inline-block rounded-full bg-white px-8 py-4 text-sm font-semibold text-ink transition hover:bg-white/90"
-    >
-      {cta.button.label}
-    </a>
+    <ContactModal
+      client:visible
+      triggerLabel={cta.button.label}
+      booking={booking}
+      contact={contact}
+    />
   </div>
 
   {/* ---- Date-request calendar + form (emails via /api/booking) ---- */}

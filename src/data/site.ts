@@ -166,6 +166,13 @@ const content = {
       },
     },
 
+    // ---- "Send inquiry" modal (general email, no date) ----
+    contact: {
+      title: "Send us a message",
+      subtitle: "Have a question? Drop us a note and we'll reply by email.",
+      close: "Close",
+    },
+
     footer: {
       brand: "EDISON ARIAS",
       copyright: "© 2026 Edison Arias. All rights reserved.",
@@ -361,6 +368,13 @@ const content = {
         name: "Por favor ingresa tu nombre.",
         email: "Por favor ingresa un correo válido.",
       },
+    },
+
+    // ---- Modal "Enviar consulta" (correo general, sin fecha) ----
+    contact: {
+      title: "Envíanos un mensaje",
+      subtitle: "¿Tienes una pregunta? Escríbenos y te responderemos por correo.",
+      close: "Cerrar",
     },
 
     footer: {

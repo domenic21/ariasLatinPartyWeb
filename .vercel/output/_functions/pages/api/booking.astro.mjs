@@ -3,7 +3,7 @@ export { renderers } from '../../renderers.mjs';
 
 const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "PUBLIC_EMAILJS_PUBLIC_KEY": "LGkGsLeGBVBiY5RCj", "PUBLIC_EMAILJS_SERVICE_ID": "service_ingl5id", "PUBLIC_EMAILJS_TEMPLATE_ID": "template_rvpyty4", "SITE": "https://www.ariaslatinparty.com", "SSR": true};
 const prerender = false;
-const env = (key) => Object.assign(__vite_import_meta_env__, { RESEND_API_KEY: "re_9ccrrh1t_MZB5pSMQWpNHCghdHMx1RuvM", BOOKING_TO_EMAIL: "darias@vcssoftware.com", BOOKING_FROM_EMAIL: "Arias Latin Party <onboarding@resend.dev>", OS: process.env.OS })[key] ?? process.env[key];
+const env = (key) => Object.assign(__vite_import_meta_env__, { RESEND_API_KEY: "re_9ccrrh1t_MZB5pSMQWpNHCghdHMx1RuvM", BOOKING_TO_EMAIL: "fdarias21@gmail.com", BOOKING_FROM_EMAIL: "Arias Latin Party <onboarding@resend.dev>", OS: process.env.OS })[key] ?? process.env[key];
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
   headers: { "Content-Type": "application/json" }
@@ -31,7 +31,6 @@ const POST = async ({ request }) => {
   const phone = String(body.phone ?? "").trim();
   const eventType = String(body.eventType ?? "").trim();
   const message = String(body.message ?? "").trim();
-  if (!date) return json({ ok: false, error: "Missing date." }, 400);
   if (!name) return json({ ok: false, error: "Missing name." }, 400);
   if (!isEmail(email)) return json({ ok: false, error: "Invalid email." }, 400);
   const to = env("BOOKING_TO_EMAIL") ?? "darias@vcssoftware.com";
@@ -43,11 +42,11 @@ const POST = async ({ request }) => {
       to,
       replyTo: email,
       // replying goes straight to the requester
-      subject: `New date request: ${date}${eventType ? ` — ${eventType}` : ""}`,
+      subject: date ? `New date request: ${date}${eventType ? ` — ${eventType}` : ""}` : `New inquiry from ${name}`,
       html: `
-        <h2>New event date request</h2>
+        <h2>${date ? "New event date request" : "New website inquiry"}</h2>
         <table style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
-          <tr><td style="padding:4px 12px 4px 0"><strong>Requested date</strong></td><td>${esc(date)}</td></tr>
+          ${date ? `<tr><td style="padding:4px 12px 4px 0"><strong>Requested date</strong></td><td>${esc(date)}</td></tr>` : ""}
           <tr><td style="padding:4px 12px 4px 0"><strong>Name</strong></td><td>${esc(name)}</td></tr>
           <tr><td style="padding:4px 12px 4px 0"><strong>Email</strong></td><td>${esc(email)}</td></tr>
           <tr><td style="padding:4px 12px 4px 0"><strong>Phone</strong></td><td>${esc(phone) || "—"}</td></tr>
