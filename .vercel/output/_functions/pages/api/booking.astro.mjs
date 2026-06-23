@@ -1,9 +1,14 @@
 import { Resend } from 'resend';
 export { renderers } from '../../renderers.mjs';
 
-const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "PUBLIC_EMAILJS_PUBLIC_KEY": "LGkGsLeGBVBiY5RCj", "PUBLIC_EMAILJS_SERVICE_ID": "service_ingl5id", "PUBLIC_EMAILJS_TEMPLATE_ID": "template_rvpyty4", "SITE": "https://www.ariaslatinparty.com", "SSR": true};
+const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "PUBLIC_EMAILJS_PUBLIC_KEY": "LGkGsLeGBVBiY5RCj", "PUBLIC_EMAILJS_SERVICE_ID": "service_ingl5id", "PUBLIC_EMAILJS_TEMPLATE_ID": "template_rvpyty4", "PUBLIC_TURNSTILE_SITE_KEY": "", "SITE": "https://www.ariaslatinparty.com", "SSR": true};
 const prerender = false;
-const env = (key) => Object.assign(__vite_import_meta_env__, { RESEND_API_KEY: "re_9ccrrh1t_MZB5pSMQWpNHCghdHMx1RuvM", BOOKING_TO_EMAIL: "fdarias21@gmail.com", BOOKING_FROM_EMAIL: "Arias Latin Party <onboarding@resend.dev>", OS: process.env.OS })[key] ?? process.env[key];
+const env = (key) => {
+  const fromProcess = process.env[key];
+  if (fromProcess) return fromProcess;
+  const fromMeta = Object.assign(__vite_import_meta_env__, { RESEND_API_KEY: "re_9ccrrh1t_MZB5pSMQWpNHCghdHMx1RuvM", BOOKING_TO_EMAIL: "fdarias21@gmail.com", BOOKING_FROM_EMAIL: "Arias Latin Party <onboarding@resend.dev>", TURNSTILE_SECRET_KEY: "", OS: process.env.OS })[key];
+  return fromMeta || void 0;
+};
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
   headers: { "Content-Type": "application/json" }
@@ -13,7 +18,30 @@ const esc = (v) => v.replace(
   /[&<>"']/g,
   (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]
 );
-const POST = async ({ request }) => {
+async function verifyTurnstile(token, ip) {
+  const secret = env("TURNSTILE_SECRET_KEY");
+  if (!secret) return true;
+  if (!token) return false;
+  try {
+    const res = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret,
+          response: token,
+          ...ip ? { remoteip: ip } : {}
+        })
+      }
+    );
+    const data = await res.json().catch(() => ({}));
+    return data.success === true;
+  } catch {
+    return false;
+  }
+}
+const POST = async ({ request, clientAddress }) => {
   const apiKey = env("RESEND_API_KEY");
   if (!apiKey) {
     console.error("[booking] RESEND_API_KEY is not set");
@@ -24,6 +52,16 @@ const POST = async ({ request }) => {
     body = await request.json();
   } catch {
     return json({ ok: false, error: "Invalid request body." }, 400);
+  }
+  if (String(body.company ?? "").trim() !== "") {
+    return json({ ok: true });
+  }
+  const turnstileOk = await verifyTurnstile(
+    String(body.turnstileToken ?? ""),
+    clientAddress
+  );
+  if (!turnstileOk) {
+    return json({ ok: false, error: "Verification failed." }, 403);
   }
   const date = String(body.date ?? "").trim();
   const name = String(body.name ?? "").trim();

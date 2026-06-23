@@ -163,6 +163,7 @@ const content = {
         date: "Please pick a date.",
         name: "Please enter your name.",
         email: "Please enter a valid email.",
+        captcha: "Please complete the verification.",
       },
     },
 
@@ -367,6 +368,7 @@ const content = {
         date: "Por favor elige una fecha.",
         name: "Por favor ingresa tu nombre.",
         email: "Por favor ingresa un correo válido.",
+        captcha: "Por favor completa la verificación.",
       },
     },
 

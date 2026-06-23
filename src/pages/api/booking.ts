@@ -22,11 +22,17 @@ import { Resend } from "resend";
 // Mark as on-demand (server) so the API key never reaches the client bundle.
 export const prerender = false;
 
-// Read env at runtime. import.meta.env covers local `.env`; process.env
-// covers values set in the Vercel dashboard.
-const env = (key: string): string | undefined =>
-  (import.meta.env as Record<string, string | undefined>)[key] ??
-  process.env[key];
+// Read env, returning the first NON-EMPTY value. process.env wins (that's
+// where Vercel dashboard vars live at runtime); import.meta.env is the
+// build-time fallback that picks up the local `.env` during dev.
+// Treating "" as unset is important: a blank var in `.env` must not shadow
+// a real value configured in the Vercel dashboard.
+const env = (key: string): string | undefined => {
+  const fromProcess = process.env[key];
+  if (fromProcess) return fromProcess;
+  const fromMeta = (import.meta.env as Record<string, string | undefined>)[key];
+  return fromMeta || undefined;
+};
 
 const json = (data: unknown, status = 200) =>
   new Response(JSON.stringify(data), {
@@ -43,7 +49,34 @@ const esc = (v: string) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]!)
   );
 
-export const POST: APIRoute = async ({ request }) => {
+// Verify a Cloudflare Turnstile token against Cloudflare's API.
+// If no secret is configured, verification is skipped (returns true) so the
+// site keeps working until the keys are added.
+async function verifyTurnstile(token: string, ip?: string): Promise<boolean> {
+  const secret = env("TURNSTILE_SECRET_KEY");
+  if (!secret) return true; // not configured yet
+  if (!token) return false;
+  try {
+    const res = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret,
+          response: token,
+          ...(ip ? { remoteip: ip } : {}),
+        }),
+      }
+    );
+    const data = (await res.json().catch(() => ({}))) as { success?: boolean };
+    return data.success === true;
+  } catch {
+    return false;
+  }
+}
+
+export const POST: APIRoute = async ({ request, clientAddress }) => {
   const apiKey = env("RESEND_API_KEY");
   if (!apiKey) {
     console.error("[booking] RESEND_API_KEY is not set");
@@ -56,6 +89,21 @@ export const POST: APIRoute = async ({ request }) => {
     body = await request.json();
   } catch {
     return json({ ok: false, error: "Invalid request body." }, 400);
+  }
+
+  // Honeypot: a hidden field real users never see. If it's filled, it's a bot.
+  // Return a fake success so the bot doesn't learn it was blocked.
+  if (String(body.company ?? "").trim() !== "") {
+    return json({ ok: true });
+  }
+
+  // Anti-spam: verify the Turnstile token before doing any work.
+  const turnstileOk = await verifyTurnstile(
+    String(body.turnstileToken ?? ""),
+    clientAddress
+  );
+  if (!turnstileOk) {
+    return json({ ok: false, error: "Verification failed." }, 403);
   }
 
   // Pull + trim fields.

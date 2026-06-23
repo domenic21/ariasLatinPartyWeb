@@ -12,6 +12,9 @@
      contact      -> contact-modal labels (title/subtitle/close)
    ============================================================ */
 import { useEffect, useState } from "react";
+import Turnstile from "./Turnstile.jsx";
+
+const NEEDS_CAPTCHA = !!import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 export default function ContactModal({ triggerLabel, booking, contact }) {
   const [open, setOpen] = useState(false);
@@ -23,6 +26,8 @@ export default function ContactModal({ triggerLabel, booking, contact }) {
   });
   const [status, setStatus] = useState("idle"); // idle | sending | success | error
   const [error, setError] = useState("");
+  const [token, setToken] = useState(""); // Turnstile token
+  const [hp, setHp] = useState(""); // honeypot — must stay empty
 
   const setField = (key) => (e) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
@@ -45,6 +50,8 @@ export default function ContactModal({ triggerLabel, booking, contact }) {
     setTimeout(() => {
       setStatus("idle");
       setError("");
+      setToken("");
+      setHp("");
       setForm({ name: "", email: "", phone: "", message: "" });
     }, 200);
   }
@@ -55,13 +62,15 @@ export default function ContactModal({ triggerLabel, booking, contact }) {
     if (!form.name.trim()) return setError(booking.validation.name);
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       return setError(booking.validation.email);
+    if (NEEDS_CAPTCHA && !token) return setError(booking.validation.captcha);
 
     setStatus("sending");
     try {
       const res = await fetch("/api/booking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form), // no `date` -> plain inquiry
+        // no `date` -> plain inquiry
+        body: JSON.stringify({ ...form, company: hp, turnstileToken: token }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.ok) throw new Error(data.error || "request_failed");
@@ -163,6 +172,20 @@ export default function ContactModal({ triggerLabel, booking, contact }) {
                   onChange={setField("message")}
                   rows={4}
                 />
+
+                {/* Honeypot — hidden from real users; bots tend to fill it. */}
+                <input
+                  type="text"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={hp}
+                  onChange={(e) => setHp(e.target.value)}
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-9999px", width: 1, height: 1 }}
+                />
+
+                <Turnstile onToken={setToken} />
 
                 {(error || status === "error") && (
                   <p className="text-sm text-neon-pink">

@@ -15,6 +15,10 @@
      lang    -> "en" | "es" (used for date formatting)
    ============================================================ */
 import { useMemo, useState } from "react";
+import Turnstile from "./Turnstile.jsx";
+
+// Whether the Turnstile CAPTCHA is configured (key present at build time).
+const NEEDS_CAPTCHA = !!import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 // Strip the time component so date-only comparisons are clean.
 function atMidnight(d) {
@@ -41,6 +45,8 @@ export default function BookingForm({ labels, lang = "en" }) {
   });
   const [status, setStatus] = useState("idle"); // idle | sending | success | error
   const [error, setError] = useState("");
+  const [token, setToken] = useState(""); // Turnstile token
+  const [hp, setHp] = useState(""); // honeypot — must stay empty
 
   const setField = (key) => (e) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
@@ -87,13 +93,19 @@ export default function BookingForm({ labels, lang = "en" }) {
     if (!form.name.trim()) return setError(labels.validation.name);
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       return setError(labels.validation.email);
+    if (NEEDS_CAPTCHA && !token) return setError(labels.validation.captcha);
 
     setStatus("sending");
     try {
       const res = await fetch("/api/booking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, date: selectedLabel }),
+        body: JSON.stringify({
+          ...form,
+          date: selectedLabel,
+          company: hp, // honeypot
+          turnstileToken: token,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.ok) throw new Error(data.error || "request_failed");
@@ -242,6 +254,20 @@ export default function BookingForm({ labels, lang = "en" }) {
           onChange={setField("message")}
           rows={3}
         />
+
+        {/* Honeypot — hidden from real users; bots tend to fill it. */}
+        <input
+          type="text"
+          name="company"
+          tabIndex={-1}
+          autoComplete="off"
+          value={hp}
+          onChange={(e) => setHp(e.target.value)}
+          aria-hidden="true"
+          style={{ position: "absolute", left: "-9999px", width: 1, height: 1 }}
+        />
+
+        <Turnstile onToken={setToken} />
 
         {(error || status === "error") && (
           <p className="text-sm text-neon-pink">

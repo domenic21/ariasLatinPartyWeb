@@ -1,0 +1,1 @@
+import"./jsx-runtime.ClP7wGfN.js";import{r}from"./index.DK-fsZOb.js";function n({onToken:e}){r.useRef(null),r.useRef(null);const t=r.useRef(e);return t.current=e,r.useEffect(()=>{},[]),null}export{n as T};
