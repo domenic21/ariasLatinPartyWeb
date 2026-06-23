@@ -1,12 +1,12 @@
 import { Resend } from 'resend';
 export { renderers } from '../../renderers.mjs';
 
-const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "PUBLIC_EMAILJS_PUBLIC_KEY": "LGkGsLeGBVBiY5RCj", "PUBLIC_EMAILJS_SERVICE_ID": "service_ingl5id", "PUBLIC_EMAILJS_TEMPLATE_ID": "template_rvpyty4", "PUBLIC_TURNSTILE_SITE_KEY": "", "SITE": "https://www.ariaslatinparty.com", "SSR": true};
+const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "PUBLIC_EMAILJS_PUBLIC_KEY": "LGkGsLeGBVBiY5RCj", "PUBLIC_EMAILJS_SERVICE_ID": "service_ingl5id", "PUBLIC_EMAILJS_TEMPLATE_ID": "template_rvpyty4", "PUBLIC_TURNSTILE_SITE_KEY": "0x4AAAAAADp2fvSgZa2TRJcL", "SITE": "https://www.ariaslatinparty.com", "SSR": true};
 const prerender = false;
 const env = (key) => {
   const fromProcess = process.env[key];
   if (fromProcess) return fromProcess;
-  const fromMeta = Object.assign(__vite_import_meta_env__, { RESEND_API_KEY: "re_9ccrrh1t_MZB5pSMQWpNHCghdHMx1RuvM", BOOKING_TO_EMAIL: "fdarias21@gmail.com", BOOKING_FROM_EMAIL: "Arias Latin Party <onboarding@resend.dev>", TURNSTILE_SECRET_KEY: "", OS: process.env.OS })[key];
+  const fromMeta = Object.assign(__vite_import_meta_env__, { RESEND_API_KEY: "re_9ccrrh1t_MZB5pSMQWpNHCghdHMx1RuvM", BOOKING_TO_EMAIL: "fdarias21@gmail.com", BOOKING_FROM_EMAIL: "Arias Latin Party <onboarding@resend.dev>", TURNSTILE_SECRET_KEY: "0x4AAAAAADp2fi2WrbX4YN-K71iVln0DqnE", OS: process.env.OS, _: process.env._ })[key];
   return fromMeta || void 0;
 };
 const json = (data, status = 200) => new Response(JSON.stringify(data), {

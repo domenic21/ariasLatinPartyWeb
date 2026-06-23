@@ -12,7 +12,7 @@ const ACTION_QUERY_PARAMS$1 = {
   actionName: "_action"};
 const ACTION_RPC_ROUTE_PATTERN = "/_actions/[...path]";
 
-const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "PUBLIC_EMAILJS_PUBLIC_KEY": "LGkGsLeGBVBiY5RCj", "PUBLIC_EMAILJS_SERVICE_ID": "service_ingl5id", "PUBLIC_EMAILJS_TEMPLATE_ID": "template_rvpyty4", "PUBLIC_TURNSTILE_SITE_KEY": "", "SITE": "https://www.ariaslatinparty.com", "SSR": true};
+const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "PUBLIC_EMAILJS_PUBLIC_KEY": "LGkGsLeGBVBiY5RCj", "PUBLIC_EMAILJS_SERVICE_ID": "service_ingl5id", "PUBLIC_EMAILJS_TEMPLATE_ID": "template_rvpyty4", "PUBLIC_TURNSTILE_SITE_KEY": "0x4AAAAAADp2fvSgZa2TRJcL", "SITE": "https://www.ariaslatinparty.com", "SSR": true};
 const ACTION_QUERY_PARAMS = ACTION_QUERY_PARAMS$1;
 const codeToStatusMap = {
   // Implemented from IANA HTTP Status Code Registry
@@ -126,7 +126,7 @@ function getActionQueryString(name) {
 }
 function serializeActionResult(res) {
   if (res.error) {
-    if (Object.assign(__vite_import_meta_env__, {})?.DEV) {
+    if (Object.assign(__vite_import_meta_env__, { _: process.env._ })?.DEV) {
       actionResultErrorStack.set(res.error.stack);
     }
     let body2;
@@ -193,7 +193,7 @@ function deserializeActionResult(res) {
         })
       };
     }
-    if (Object.assign(__vite_import_meta_env__, {})?.PROD) {
+    if (Object.assign(__vite_import_meta_env__, { _: process.env._ })?.PROD) {
       return { error: ActionError.fromJson(json), data: void 0 };
     } else {
       const error = ActionError.fromJson(json);

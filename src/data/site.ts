@@ -33,7 +33,7 @@ const content = {
         { label: "Services", href: "#services" },
         { label: "Gallery", href: "#gallery" },
         { label: "Contact", href: "#contact" },
-        { label: "Socials", href: "https://www.ariaslatinparty.com/linktree" },
+        { label: "Socials", href: "/linktree" },
       ],
       cta: { label: "BOOK NOW", href: "#contact" },
     },
@@ -43,7 +43,7 @@ const content = {
       titleLines: ["DJ", "EDY", "SERRANO"],
       subtitle:
         "30+ years of experience in Ecuador, now offerering services across NY - NJ and on request many other states across the US. ",
-      primaryCta: { label: "Social Media", href: "https://www.ariaslatinparty.com/linktree" },
+      primaryCta: { label: "Social Media", href: "/linktree" },
       secondaryCta: { label: "Contact Us", href: "#contact" },
     
     },
@@ -239,7 +239,7 @@ const content = {
         { label: "Servicios", href: "#services" },
         { label: "Galería", href: "#gallery" },
         { label: "Contacto", href: "#contact" },
-        { label: "Redes Sociales", href: "https://www.ariaslatinparty.com/linktree" },
+        { label: "Redes Sociales", href: "/linktree" },
       ],
       cta: { label: "RESERVAR", href: "#contact" },
     },
