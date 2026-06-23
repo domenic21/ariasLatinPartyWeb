@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import vercel from '@astrojs/vercel';
 
 // Astro main config.
 // - site: your real domain. ⚠️ CHANGE THIS to your live URL before deploying.
@@ -22,6 +23,12 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   integrations: [react(), sitemap()],
+  // The site stays static by default (every page is pre-rendered to HTML).
+  // The Vercel adapter only kicks in for the ONE on-demand route that needs a
+  // server: src/pages/api/booking.ts (it sets `export const prerender = false`).
+  // That endpoint runs as a Vercel serverless function so the secret
+  // RESEND_API_KEY never reaches the browser.
+  adapter: vercel(),
   vite: {
     plugins: [tailwindcss()],
   },

@@ -132,6 +132,40 @@ const content = {
       button: { label: "SEND INQUIRY NOW", href: "mailto:booking@edisonarias.com" },
     },
 
+    // ---- Booking / date-request form (calendar + contact details) ----
+    booking: {
+      eyebrow: "CHECK A DATE",
+      title: "REQUEST YOUR EVENT DATE",
+      intro:
+        "Pick the day you have in mind and send us your details. We'll confirm availability and get right back to you.",
+      months: [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December",
+      ],
+      weekdays: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+      selectedLabel: "Selected date",
+      noDateLabel: "No date selected yet",
+      fields: {
+        name: "Your name",
+        email: "Email",
+        phone: "Phone (optional)",
+        eventType: "Type of event",
+        message: "Tell us about your event",
+      },
+      eventTypes: ["Wedding", "Quinceañera", "Corporate", "Birthday", "Nightclub", "Other"],
+      submit: "Request this date",
+      sending: "Sending…",
+      successTitle: "Request sent! 🎉",
+      successBody: "Thanks — we received your date request and will reply by email soon.",
+      errorTitle: "Something went wrong",
+      errorBody: "Please try again, or reach us directly by phone or WhatsApp.",
+      validation: {
+        date: "Please pick a date.",
+        name: "Please enter your name.",
+        email: "Please enter a valid email.",
+      },
+    },
+
     footer: {
       brand: "EDISON ARIAS",
       copyright: "© 2026 Edison Arias. All rights reserved.",
@@ -293,6 +327,40 @@ const content = {
       serviceArea: "NJ Y TRI-STATE",
       labels: { access: "ACCESO DIRECTO", hq: "SEDE DE SERVICIO" },
       button: { label: "ENVIAR CONSULTA", href: "mailto:fdarias21@gmail.com" },
+    },
+
+    // ---- Formulario de reserva / solicitud de fecha (calendario + datos) ----
+    booking: {
+      eyebrow: "CONSULTA UNA FECHA",
+      title: "SOLICITA LA FECHA DE TU EVENTO",
+      intro:
+        "Elige el día que tienes en mente y envíanos tus datos. Confirmaremos la disponibilidad y te responderemos enseguida.",
+      months: [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",
+      ],
+      weekdays: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+      selectedLabel: "Fecha seleccionada",
+      noDateLabel: "Aún no has elegido una fecha",
+      fields: {
+        name: "Tu nombre",
+        email: "Correo electrónico",
+        phone: "Teléfono (opcional)",
+        eventType: "Tipo de evento",
+        message: "Cuéntanos sobre tu evento",
+      },
+      eventTypes: ["Boda", "Quinceañera", "Corporativo", "Cumpleaños", "Discoteca", "Otro"],
+      submit: "Solicitar esta fecha",
+      sending: "Enviando…",
+      successTitle: "¡Solicitud enviada! 🎉",
+      successBody: "Gracias — recibimos tu solicitud de fecha y te responderemos por correo pronto.",
+      errorTitle: "Algo salió mal",
+      errorBody: "Inténtalo de nuevo o contáctanos directamente por teléfono o WhatsApp.",
+      validation: {
+        date: "Por favor elige una fecha.",
+        name: "Por favor ingresa tu nombre.",
+        email: "Por favor ingresa un correo válido.",
+      },
     },
 
     footer: {

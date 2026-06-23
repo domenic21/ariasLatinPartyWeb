@@ -6,7 +6,8 @@
       "Read(//c/Users/domen/Downloads/**)",
       "Bash(unzip -o pioneer_dj_console.zip -d pioneer_dj_console_extracted)",
       "Bash(npm install *)",
-      "Bash(unzip -o krk-ce-99.zip -d krk_extracted)"
+      "Bash(unzip -o krk-ce-99.zip -d krk_extracted)",
+      "PowerShell(npm run build 2>&1)"
     ]
   }
 }

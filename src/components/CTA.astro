@@ -4,7 +4,9 @@
    Content comes from: src/data/site.ts -> `cta`
    ============================================================ */
 import { getContent } from "../data/site";
-const { cta } = getContent(Astro.currentLocale);
+import BookingForm from "./BookingForm.jsx";
+const lang = Astro.currentLocale ?? "en";
+const { cta, booking } = getContent(lang);
 ---
 
 <section id="contact" class="mx-auto max-w-5xl px-6 py-28">
@@ -38,5 +40,18 @@ const { cta } = getContent(Astro.currentLocale);
     >
       {cta.button.label}
     </a>
+  </div>
+
+  {/* ---- Date-request calendar + form (emails via /api/booking) ---- */}
+  <div class="mt-12 text-center">
+    <div class="text-xs tracking-widest text-white/40">{booking.eyebrow}</div>
+    <h3 class="mt-2 font-display text-3xl font-black italic sm:text-4xl">
+      {booking.title}
+    </h3>
+    <p class="mx-auto mt-3 max-w-xl text-sm text-white/60">{booking.intro}</p>
+  </div>
+
+  <div class="mt-8">
+    <BookingForm client:visible labels={booking} lang={lang} />
   </div>
 </section>

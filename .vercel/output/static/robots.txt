@@ -1,0 +1,25 @@
+# robots.txt — controls what search engines + AI crawlers may access.
+# We allow everything (this is a public marketing site) and point
+# crawlers to the sitemap so they discover all pages.
+
+User-agent: *
+Allow: /
+
+# Explicitly welcome major AI engine crawlers (helps AI-search visibility).
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# ⚠️ Update the domain below to match astro.config.mjs `site`.
+Sitemap: https://www.ariaslatinparty.com/sitemap-index.xml
