@@ -22,7 +22,13 @@ export default defineConfig({
     defaultLocale: 'en',
     routing: { prefixDefaultLocale: false },
   },
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    // i18n: adds hreflang links between "/" and "/es/" inside the sitemap.
+    sitemap({
+      i18n: { defaultLocale: 'en', locales: { en: 'en-US', es: 'es-US' } },
+    }),
+  ],
   // The site stays static by default (every page is pre-rendered to HTML).
   // The Vercel adapter only kicks in for the ONE on-demand route that needs a
   // server: src/pages/api/booking.ts (it sets `export const prerender = false`).

@@ -27,13 +27,20 @@ const { cta, booking, contact } = getContent(lang);
     >
       <div>
         <div class="text-xs tracking-widest text-white/40">{cta.labels.access}</div>
-        {cta.phones.map((p) => <div class="font-display text-xl font-bold">{p}</div>)}
+        {cta.phones.map((p) => (
+          <a href={`tel:+1${p.replace(/\D/g, "")}`} class="block font-display text-xl font-bold transition hover:text-neon-blue">
+            {p}
+          </a>
+        ))}
       </div>
       <div>
         <div class="text-xs tracking-widest text-white/40">{cta.labels.hq}</div>
         <div class="font-display text-xl font-bold">{cta.serviceArea}</div>
       </div>
     </div>
+
+    {/* City list — visible local keywords for Houston-area searches */}
+    <p class="mx-auto mt-6 max-w-xl text-xs text-white/40">{cta.areas}</p>
 
     <ContactModal
       client:visible

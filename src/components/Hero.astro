@@ -1,16 +1,15 @@
 ---
 /* ============================================================
    HERO  (first screen)
-   Layout (desktop):  [ text on the LEFT ]   [ 3D console on the RIGHT ]
-   Layout (mobile):   text stacked on top, 3D console below.
+   Layout (desktop):  [ text on the LEFT ]   [ video of Edison on the RIGHT ]
+   Layout (mobile):   video on top, text below.
    Background:        the ARIAS logo as a large faint watermark.
 
    Content comes from: src/data/site.ts -> `hero`
-   3D element comes from: src/components/three/HeroScene.jsx
+   Video:             /public/videos/ (hero.webm, hero.mp4, hero-poster.jpg)
    Logo watermark:    /public/images/logo.png
    ============================================================ */
 import { getContent } from "../data/site";
-import HeroScene from "./three/HeroScene.jsx";
 const { hero } = getContent(Astro.currentLocale);
 ---
 
@@ -35,14 +34,14 @@ const { hero } = getContent(Astro.currentLocale);
   >
     {/* ===== LEFT: hero text ===== */}
     <div class="order-2 text-center lg:order-1 lg:text-left">
-      <p class="mb-4 text-xs font-semibold tracking-[0.3em] text-neon-blue sm:text-sm">
-        {hero.badge}
-      </p>
-
-      {/* Headline (DJ Edy Serrano): Nosifer display font.
-          Middle line gets the neon-blue gradient. Nosifer is dense/tall,
-          so sizes are a bit smaller with extra line spacing. */}
+      {/* Headline. The badge ("Latin DJ in Houston, TX") is the first line
+          of the <h1> so Google sees the main keyword + city in the page's
+          top heading. The name lines below use the Nosifer display font;
+          the middle line gets the neon-blue gradient. */}
       <h1 class="font-graffiti text-4xl leading-[1.35] sm:text-6xl xl:text-7xl">
+        <span class="mb-4 block font-body text-xs font-semibold leading-normal tracking-[0.3em] text-neon-blue sm:text-sm">
+          {hero.badge}
+        </span>
         {
           hero.titleLines.map((line, i) => (
             <span class={`block ${i === 1 ? "text-gradient" : "text-white"}`}>
@@ -73,15 +72,58 @@ const { hero } = getContent(Astro.currentLocale);
       </div>
     </div>
 
-    {/* ===== RIGHT: floating 3D DJ console (zoomed in) =====
-         client:only="react" => render ONLY in the browser (Three.js needs WebGL).
-         Heights are responsive so it never dominates a phone screen:
-           mobile  -> 320px,  small -> 420px,  large -> 560px.
-         The `animate-float` class gives it a gentle floating bob. */}
+    {/* ===== RIGHT: vertical clip of Edison playing =====
+         The clip is vertical (9:16, shot for TikTok/Reels), so it sits in a
+         tall rounded card. Behind it, a blurred + darkened copy of the poster
+         fills the column so the vertical shape looks intentional on desktop.
+         Files: public/videos/hero.webm|mp4 (~350 KB) + hero-poster.jpg, which
+         shows instantly while the video loads (and stays if motion is reduced).
+         Heights are capped so the headline + buttons stay visible on phones. */}
     <div class="order-1 lg:order-2">
-      <div class="animate-float h-[320px] w-full sm:h-[420px] lg:h-[560px]">
-        <HeroScene client:only="react" />
+      <div class="relative mx-auto flex h-[300px] items-center justify-center sm:h-[440px] lg:h-[600px]">
+        {/* Blurred backdrop glow (desktop/tablet only) */}
+        <div
+          aria-hidden="true"
+          class="absolute inset-y-6 left-1/2 hidden w-[110%] max-w-[560px] -translate-x-1/2 rounded-[3rem] bg-cover bg-center opacity-40 blur-3xl sm:block"
+          style="background-image: url('/videos/hero-poster.jpg')"
+        >
+        </div>
+
+        {/* The video card */}
+        <div class="relative aspect-[9/16] h-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-neon-blue/20">
+          <video
+            id="hero-video"
+            class="h-full w-full object-cover"
+            poster="/videos/hero-poster.jpg"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-label={hero.videoLabel}
+          >
+            <source src="/videos/hero.webm" type="video/webm" />
+            <source src="/videos/hero.mp4" type="video/mp4" />
+          </video>
+          {/* Tint + bottom fade so the bright wall blends into the dark theme */}
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-neon-violet/20"
+          >
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<script is:inline>
+  // Respect "reduce motion": keep the still poster instead of the looping clip.
+  (function () {
+    const v = document.getElementById("hero-video");
+    if (v && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      v.removeAttribute("autoplay");
+      v.pause();
+    }
+  })();
+</script>

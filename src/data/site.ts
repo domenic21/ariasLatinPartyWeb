@@ -39,20 +39,20 @@ const content = {
     },
 
     hero: {
-      badge: "PREMIUM SOUND & PROFESSIONAL DJ SERVICES",
+      badge: "ECUADORIAN & LATIN DJ IN HOUSTON, TX",
+      videoLabel: "DJ Edison Arias mixing live on a Pioneer controller",
       titleLines: ["DJ", "EDY", "SERRANO"],
       subtitle:
-        "30+ years of experience in Ecuador, now offerering services across NY - NJ and on request many other states across the US. ",
-      primaryCta: { label: "Social Media", href: "/linktree" },
-      secondaryCta: { label: "Contact Us", href: "#contact" },
-    
+        "30+ years of experience from Ecuador, now bringing Latin music, sound and lighting to weddings, quinceañeras and parties across Houston and nearby areas.",
+      primaryCta: { label: "Check Your Date", href: "#contact" },
+      secondaryCta: { label: "Social Media", href: "/linktree" },
     },
 
     services: {
       eyebrow: "THE ARSENAL",
       title: "GEAR & SERVICES",
       intro:
-        "We provide a full spectrum of services to elevate your event.",
+        "Everything your Houston event needs — DJ, sound, lighting and a mobile bar — from one team.",
       cards: [
         {
           title: "PROFESSIONAL DJ",
@@ -65,15 +65,6 @@ const content = {
           tags: [],
         },
         {
-          title: "HORA LOCA",
-          body: "LED Robots, Professional Dancers, and more.",
-          tags: [],
-          stats: [
-            { value: "MAX", label: "ENERGY OUTPUT" },
-            { value: "4K", label: "LED INTENSITY" },
-          ],
-        },
-        {
           title: "LIGHTING DESIGN",
           body: "Atmospheric immersion through intelligent beam sequences.",
           tags: [],
@@ -83,6 +74,11 @@ const content = {
           body: "Crafting exquisite cocktails and providing top-notch bartending services. Partnered with local business Lily's Experience, a full-service mobile bar with a wide variety of spirits, mixers, and garnishes to elevate your event.",
           tags: [],
         },
+        {
+          title: "HORA LOCA",
+          body: "Available on request. Ask us and we'll check availability for your date.",
+          tags: ["On request"],
+        },
       ],
     },
 
@@ -90,7 +86,7 @@ const content = {
       eyebrow: "THE LEGEND",
       name: { first: "EDISON", last: "ARIAS" },
       yearsBadge: { value: "30+", label: "YEARS OF EXPERIENCE" },
-      body: "More than a DJ; a sound architect. From Ecuador, now in New Jersey, USA. With a trajectory of immense success, Edison has played with world-renowned artists, including David Guetta & Tiesto",
+      body: "More than a DJ; a sound architect. From Ecuador, now based in Houston, Texas. With a trajectory of immense success, Edison has played with world-renowned artists, including David Guetta & Tiesto",
     },
 
     testimonials: {
@@ -121,14 +117,16 @@ const content = {
       eyebrow: "THE MOMENTS",
       title: "GALLERY",
       intro: "Swipe through. More moments coming soon.",
+      imageAlt: "Latin DJ Edison Arias live event photo",
     },
 
     cta: {
       titleLines: ["Contact Us"],
       body: "Dates for 2026 season are filling fast. Secure your spot now.",
       phones: ["(201) 898-7592", "(201) 554-4914"],
-      serviceArea: "NJ & TRI-STATE",
-      labels: { access: "DIRECT ACCESS", hq: "SERVICE HQ" },
+      serviceArea: "HOUSTON, TX & NEARBY",
+      areas: "Proudly serving Houston, Katy, Sugar Land, Pasadena, Pearland, Missouri City, Cypress, Spring, Humble, The Woodlands, Baytown, League City, Conroe and Galveston.",
+      labels: { access: "DIRECT ACCESS", hq: "SERVICE AREA" },
       button: { label: "SEND INQUIRY NOW", href: "mailto:booking@edisonarias.com" },
     },
 
@@ -185,34 +183,38 @@ const content = {
     },
 
     seo: {
-      title: "Edison Arias | Latin DJ & Sound Engineering — NJ & NY Tri-State",
+      title: "Latin DJ in Houston, TX | Ecuadorian DJ Edison Arias — Arias Latin Party",
       description:
-        "Edison Arias delivers premium Latin DJ services, live sound engineering, and high-energy Hora Loca shows across New Jersey & the NY Tri-State. 30+ years of experience.",
+        "Ecuadorian Latin DJ in Houston, TX for weddings, quinceañeras, birthdays & corporate events. Lighting, live sound & mobile bar. 30+ years. Check your date.",
       keywords:
-        "Latin DJ New Jersey, Hora Loca NJ, wedding DJ NY, Latino House DJ, Ecuadorian DJ, sound engineering, quinceañera DJ, Tri-State DJ",
+        "Latin DJ Houston, Ecuadorian DJ Houston, Hispanic DJ Houston, Spanish DJ Houston, bilingual DJ Houston, quinceañera DJ Houston, Latin wedding DJ Houston, DJ for parties Houston, cumbia DJ Houston, salsa DJ Houston, DJ Katy TX, DJ Sugar Land, DJ Pasadena TX, DJ Pearland, DJ The Woodlands, DJ latino Houston",
       faq: [
         {
           q: "What areas does Edison Arias DJ serve?",
-          a: "Edison Arias provides DJ and sound services across New Jersey and the New York Tri-State area, mainly focusing on nightclubs.",
+          a: "Edison Arias is a Latin DJ based in Houston, Texas, serving the greater Houston area including Katy, Sugar Land, Pasadena, Pearland, Missouri City, Cypress, Spring, Humble, The Woodlands, Baytown, League City, Conroe, and Galveston. Events outside the Houston area are available on request.",
+        },
+        {
+          q: "What types of events do you DJ in Houston?",
+          a: "Weddings, quinceañeras, birthdays, corporate events, private parties, and nightclubs. We also provide live sound for bands and orchestras, lighting design, and a mobile bar through our partner Lily's Experience. Hora Loca is available on request.",
         },
         {
           q: "What music styles does Edison Arias specialize in?",
-          a: "Edison specializes in Latin soundscapes including Latino House, Tribal House, Cumbia, Salsa, Ecuadorian Music, Top 40, and Tech-House, with 30+ years of experience.",
+          a: "Edison is an Ecuadorian DJ specializing in Latin music — Cumbia, Salsa, Ecuadorian music, Latino House, Tribal House, Tech-House, and Top 40 — with 30+ years of experience reading the dance floor.",
         },
         {
-          q: "What is a Hora Loca and does Edison Arias offer it?",
-          a: "Hora Loca ('crazy hour') is a high-energy party segment with LED robots, professional dancers, and props.",
+          q: "Do you offer Hora Loca?",
+          a: "Hora Loca ('crazy hour') is a high-energy party segment with performers and props. It's available on request — ask us when you book and we'll confirm availability for your date.",
         },
         {
           q: "How do I book Edison Arias for an event?",
-          a: "You can book by calling or messaging. We do have WhatsApp available at (201) 898-7592 or (201) 554-4914, or by sending an inquiry through the contact section of this website.",
+          a: "Pick your date in the booking calendar on this website, message us on WhatsApp, or call (201) 898-7592 or (201) 554-4914. We'll confirm availability and reply quickly.",
         },
       ],
     },
 
     linktree: {
       subtitle: "DJ Edison Arias",
-      tagline: "Premium Latin DJ · Sound · Hora Loca — NJ & NY",
+      tagline: "Ecuadorian Latin DJ · Sound · Lighting — Houston, TX",
       links: [
         { label: "Instagram", url: "https://www.instagram.com/edisonarias9/", style: "bg-gradient-to-r from-pink-500 to-purple-600 text-white" },
         { label: "YouTube", url: "https://www.youtube.com/@DJEdisonArias", style: "bg-red-600 text-white" },
@@ -245,19 +247,20 @@ const content = {
     },
 
     hero: {
-      badge: "SONIDO PREMIUM Y SERVICIOS DE DJ PROFESIONAL",
+      badge: "DJ LATINO Y ECUATORIANO EN HOUSTON, TX",
+      videoLabel: "DJ Edison Arias mezclando en vivo en un controlador Pioneer",
       titleLines: ["DJ", "EDY", "SERRANO"],
       subtitle:
-        "Más de 30 años de experiencia en Ecuador, ahora ofreciendo servicios en NY y NJ, y bajo pedido en muchos otros estados de EE. UU.",
-      primaryCta: { label: "VER PAQUETES", href: "#services" },
-      secondaryCta: { label: "NUESTRO EQUIPO", href: "#services" },
+        "Más de 30 años de experiencia desde Ecuador, ahora llevando música latina, sonido e iluminación a bodas, quinceañeras y fiestas en Houston y alrededores.",
+      primaryCta: { label: "Consulta Tu Fecha", href: "#contact" },
+      secondaryCta: { label: "Redes Sociales", href: "/linktree" },
     },
 
     services: {
       eyebrow: "EL ARSENAL",
       title: "EQUIPO Y SERVICIOS",
       intro:
-        "Ofrecemos una amplia gama de servicios para elevar tu evento.",
+        "Todo lo que tu evento en Houston necesita — DJ, sonido, iluminación y bar móvil — con un solo equipo.",
       cards: [
         {
           title: "DJ PROFESIONAL",
@@ -270,15 +273,6 @@ const content = {
           tags: [],
         },
         {
-          title: "HORA LOCA",
-          body: "Robots LED, bailarines profesionales y más.",
-          tags: [],
-          stats: [
-            { value: "MÁX", label: "ENERGÍA" },
-            { value: "4K", label: "INTENSIDAD LED" },
-          ],
-        },
-        {
           title: "DISEÑO DE ILUMINACIÓN",
           body: "Inmersión atmosférica a través de secuencias de haces inteligentes.",
           tags: [],
@@ -288,6 +282,11 @@ const content = {
           body: "Preparamos cócteles exquisitos y ofrecemos servicios de coctelería de primera categoría. Estamos asociados con el negocio local Lily's Experience, un bar móvil de servicio completo con una amplia variedad de licores, mezcladores y adornos para elevar tu evento.",
           tags: [],
         },
+        {
+          title: "HORA LOCA",
+          body: "Disponible bajo pedido. Pregúntanos y revisamos la disponibilidad para tu fecha.",
+          tags: ["Bajo pedido"],
+        },
       ],
     },
 
@@ -295,7 +294,7 @@ const content = {
       eyebrow: "LA LEYENDA",
       name: { first: "EDISON", last: "ARIAS" },
       yearsBadge: { value: "30+", label: "AÑOS DE EXPERIENCIA" },
-      body: "Más que un DJ; un arquitecto del sonido. Desde Ecuador, ahora en Nueva Jersey, EE. UU. Con una trayectoria de enorme éxito, Edison ha compartido escenario con artistas de renombre mundial, incluyendo David Guetta y Tiesto.",
+      body: "Más que un DJ; un arquitecto del sonido. Desde Ecuador, ahora en Houston, Texas. Con una trayectoria de enorme éxito, Edison ha compartido escenario con artistas de renombre mundial, incluyendo David Guetta y Tiesto.",
     },
 
     testimonials: {
@@ -326,14 +325,16 @@ const content = {
       eyebrow: "LOS MOMENTOS",
       title: "GALERÍA",
       intro: "Desliza. Más momentos próximamente.",
+      imageAlt: "Foto de evento en vivo del DJ latino Edison Arias",
     },
 
     cta: {
       titleLines: ["Contácto"],
       body: "Las fechas para la temporada 2026 se están llenando rápido. Asegura tu lugar ahora.",
       phones: ["(201) 898-7592", "(201) 554-4914"],
-      serviceArea: "NJ Y TRI-STATE",
-      labels: { access: "ACCESO DIRECTO", hq: "SEDE DE SERVICIO" },
+      serviceArea: "HOUSTON, TX Y ALREDEDORES",
+      areas: "Servimos con orgullo a Houston, Katy, Sugar Land, Pasadena, Pearland, Missouri City, Cypress, Spring, Humble, The Woodlands, Baytown, League City, Conroe y Galveston.",
+      labels: { access: "ACCESO DIRECTO", hq: "ÁREA DE SERVICIO" },
       button: { label: "ENVIAR CONSULTA", href: "mailto:fdarias21@gmail.com" },
     },
 
@@ -390,34 +391,38 @@ const content = {
     },
 
     seo: {
-      title: "Edison Arias | DJ Latino e Ingeniería de Sonido — NJ y NY",
+      title: "DJ Latino en Houston, TX | DJ Ecuatoriano Edison Arias — Arias Latin Party",
       description:
-        "Edison Arias ofrece servicios premium de DJ latino, ingeniería de sonido en vivo y espectáculos de Hora Loca de alta energía en Nueva Jersey y el área Tri-State de NY. Más de 30 años de experiencia.",
+        "DJ latino ecuatoriano en Houston, TX para bodas, quinceañeras, cumpleaños y eventos. Iluminación, sonido en vivo y bar móvil. 30+ años. Consulta tu fecha.",
       keywords:
-        "DJ latino Nueva Jersey, Hora Loca NJ, DJ de bodas NY, DJ Latino House, DJ ecuatoriano, ingeniería de sonido, DJ de quinceañera, DJ Tri-State",
+        "DJ latino Houston, DJ ecuatoriano Houston, DJ hispano Houston, DJ en español Houston, DJ para quinceañeras Houston, DJ para bodas Houston, DJ para fiestas Houston, DJ de cumbia Houston, DJ de salsa Houston, DJ Katy, DJ Sugar Land, DJ Pasadena TX, DJ Pearland",
       faq: [
         {
           q: "¿Qué áreas cubre el DJ Edison Arias?",
-          a: "Edison Arias ofrece servicios de DJ y sonido en Nueva Jersey y el área Tri-State de Nueva York, principalmente enfocándose en discotecas.",
+          a: "Edison Arias es un DJ latino con base en Houston, Texas, y cubre todo el área de Houston, incluyendo Katy, Sugar Land, Pasadena, Pearland, Missouri City, Cypress, Spring, Humble, The Woodlands, Baytown, League City, Conroe y Galveston. Eventos fuera de Houston disponibles bajo pedido.",
+        },
+        {
+          q: "¿Para qué tipo de eventos ofrecen DJ en Houston?",
+          a: "Bodas, quinceañeras, cumpleaños, eventos corporativos, fiestas privadas y discotecas. También ofrecemos sonido en vivo para bandas y orquestas, diseño de iluminación y bar móvil con nuestro aliado Lily's Experience. La Hora Loca está disponible bajo pedido.",
         },
         {
           q: "¿En qué estilos de música se especializa Edison Arias?",
-          a: "Edison se especializa en sonidos latinos incluyendo Latino House, Tribal House, Cumbia-House Fusion, Top 40 y Tech-House, con más de 30 años de experiencia.",
+          a: "Edison es un DJ ecuatoriano especializado en música latina — cumbia, salsa, música ecuatoriana, Latino House, Tribal House, Tech-House y Top 40 — con más de 30 años de experiencia.",
         },
         {
-          q: "¿Qué es la Hora Loca y la ofrece Edison Arias?",
-          a: "La Hora Loca es un segmento de fiesta de alta energía con robots LED, bailarines profesionales y props. Sí — Edison Arias ofrece producciones completas de Hora Loca.",
+          q: "¿Ofrecen Hora Loca?",
+          a: "La Hora Loca es un segmento de fiesta de alta energía con animadores y props. Está disponible bajo pedido — pregúntanos al reservar y confirmamos la disponibilidad para tu fecha.",
         },
         {
           q: "¿Cómo reservo a Edison Arias para un evento?",
-          a: "Puedes reservar llamando al (201) 898-7592 o (201) 554-4914, o enviando una consulta a través de la sección de contacto de este sitio web.",
+          a: "Elige tu fecha en el calendario de reservas de este sitio, escríbenos por WhatsApp o llama al (201) 898-7592 o (201) 554-4914. Confirmaremos la disponibilidad y te responderemos pronto.",
         },
       ],
     },
 
     linktree: {
       subtitle: "DJ Edison Arias",
-      tagline: "DJ latino premium · sonido · Hora Loca — NJ y NY",
+      tagline: "DJ latino ecuatoriano · sonido · iluminación — Houston, TX",
       links: [
         { label: "Instagram", url: "https://www.instagram.com/edisonarias9/", style: "bg-gradient-to-r from-pink-500 to-purple-600 text-white" },
         { label: "YouTube", url: "https://www.youtube.com/@DJEdisonArias", style: "bg-red-600 text-white" },
@@ -436,9 +441,17 @@ export const shared = {
   business: {
     name: "Edison Arias — Arias Latin Party",
     founderName: "Edison Arias",
+    alternateNames: ["Arias Latin Party", "DJ Edison Arias", "DJ Edy Serrano"],
     phone: "+1-201-898-7592",
     email: "booking@edisonarias.com",
-    areaServed: ["New Jersey", "New York", "Tri-State Area"],
+    // Houston metro — used for LocalBusiness `areaServed` in Layout.astro.
+    city: "Houston",
+    region: "TX",
+    areaServed: [
+      "Houston", "Katy", "Sugar Land", "Pasadena", "Pearland", "Missouri City",
+      "Cypress", "Spring", "Humble", "The Woodlands", "Baytown", "League City",
+      "Conroe", "Galveston",
+    ],
     priceRange: "$$$",
     sameAs: [
       "https://www.instagram.com/edisonarias9/",
