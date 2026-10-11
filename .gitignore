@@ -13,3 +13,6 @@ dist/
 # macOS metadata files created on exFAT/NTFS drives
 ._*
 .DS_Store
+# Raw source videos (only the compressed exports in public/videos/ are deployed)
+*.mov
+Images/Videos/
