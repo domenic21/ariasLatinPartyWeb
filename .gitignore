@@ -6,3 +6,10 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Vercel build output (rebuilt on every deploy)
+.vercel/
+
+# macOS metadata files created on exFAT/NTFS drives
+._*
+.DS_Store
