@@ -1,7 +1,7 @@
 # Edison Arias — Arias Latin Party
 
 > Ecuadorian Latin DJ based in Houston, Texas. DJ, live sound engineering,
-> lighting and mobile bar for weddings, quinceañeras,
+> and lighting for weddings, quinceañeras,
 > birthdays and corporate events across the Houston area. 30+ years of
 > experience. Bilingual (English / Spanish).
 
@@ -21,7 +21,6 @@ artists including David Guetta and Tiësto.
 - **Audio Engineering**: Live sound, equalization and mixing for bands and
   orchestras.
 - **Lighting Design**: Intelligent beam sequences and atmospheric lighting.
-- **Mobile Bar**: Bartending and mixology with partner Lily's Experience.
 - **Hora Loca**: Available on request, subject to availability.
 
 ## Service Area

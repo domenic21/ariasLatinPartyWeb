@@ -52,7 +52,7 @@ const content = {
       eyebrow: "THE ARSENAL",
       title: "GEAR & SERVICES",
       intro:
-        "Everything your Houston event needs — DJ, sound, lighting and a mobile bar — from one team.",
+        "Everything your Houston event needs — DJ, sound and lighting — from one team.",
       cards: [
         {
           title: "PROFESSIONAL DJ",
@@ -67,11 +67,6 @@ const content = {
         {
           title: "LIGHTING DESIGN",
           body: "Atmospheric immersion through intelligent beam sequences.",
-          tags: [],
-        },
-         {
-          title: "Bartending & Mixology",
-          body: "Crafting exquisite cocktails and providing top-notch bartending services. Partnered with local business Lily's Experience, a full-service mobile bar with a wide variety of spirits, mixers, and garnishes to elevate your event.",
           tags: [],
         },
         {
@@ -185,7 +180,7 @@ const content = {
     seo: {
       title: "Latin DJ in Houston, TX | Ecuadorian DJ Edison Arias — Arias Latin Party",
       description:
-        "Ecuadorian Latin DJ in Houston, TX for weddings, quinceañeras, birthdays & corporate events. Lighting, live sound & mobile bar. 30+ years. Check your date.",
+        "Ecuadorian Latin DJ in Houston, TX for weddings, quinceañeras, birthdays & corporate events. Lighting & live sound. 30+ years. Check your date.",
       keywords:
         "Latin DJ Houston, Ecuadorian DJ Houston, Hispanic DJ Houston, Spanish DJ Houston, bilingual DJ Houston, quinceañera DJ Houston, Latin wedding DJ Houston, DJ for parties Houston, cumbia DJ Houston, salsa DJ Houston, DJ Katy TX, DJ Sugar Land, DJ Pasadena TX, DJ Pearland, DJ The Woodlands, DJ latino Houston",
       faq: [
@@ -195,7 +190,7 @@ const content = {
         },
         {
           q: "What types of events do you DJ in Houston?",
-          a: "Weddings, quinceañeras, birthdays, corporate events, private parties, and nightclubs. We also provide live sound for bands and orchestras, lighting design, and a mobile bar through our partner Lily's Experience. Hora Loca is available on request.",
+          a: "Weddings, quinceañeras, birthdays, corporate events, private parties, and nightclubs. We also provide live sound for bands and orchestras, plus lighting design. Hora Loca is available on request.",
         },
         {
           q: "What music styles does Edison Arias specialize in?",
@@ -260,7 +255,7 @@ const content = {
       eyebrow: "EL ARSENAL",
       title: "EQUIPO Y SERVICIOS",
       intro:
-        "Todo lo que tu evento en Houston necesita — DJ, sonido, iluminación y bar móvil — con un solo equipo.",
+        "Todo lo que tu evento en Houston necesita — DJ, sonido e iluminación — con un solo equipo.",
       cards: [
         {
           title: "DJ PROFESIONAL",
@@ -275,11 +270,6 @@ const content = {
         {
           title: "DISEÑO DE ILUMINACIÓN",
           body: "Inmersión atmosférica a través de secuencias de haces inteligentes.",
-          tags: [],
-        },
-        {
-          title: "COCTELERÍA Y MIXOLOGÍA",
-          body: "Preparamos cócteles exquisitos y ofrecemos servicios de coctelería de primera categoría. Estamos asociados con el negocio local Lily's Experience, un bar móvil de servicio completo con una amplia variedad de licores, mezcladores y adornos para elevar tu evento.",
           tags: [],
         },
         {
@@ -393,7 +383,7 @@ const content = {
     seo: {
       title: "DJ Latino en Houston, TX | DJ Ecuatoriano Edison Arias — Arias Latin Party",
       description:
-        "DJ latino ecuatoriano en Houston, TX para bodas, quinceañeras, cumpleaños y eventos. Iluminación, sonido en vivo y bar móvil. 30+ años. Consulta tu fecha.",
+        "DJ latino ecuatoriano en Houston, TX para bodas, quinceañeras, cumpleaños y eventos. Iluminación y sonido en vivo. 30+ años. Consulta tu fecha.",
       keywords:
         "DJ latino Houston, DJ ecuatoriano Houston, DJ hispano Houston, DJ en español Houston, DJ para quinceañeras Houston, DJ para bodas Houston, DJ para fiestas Houston, DJ de cumbia Houston, DJ de salsa Houston, DJ Katy, DJ Sugar Land, DJ Pasadena TX, DJ Pearland",
       faq: [
@@ -403,7 +393,7 @@ const content = {
         },
         {
           q: "¿Para qué tipo de eventos ofrecen DJ en Houston?",
-          a: "Bodas, quinceañeras, cumpleaños, eventos corporativos, fiestas privadas y discotecas. También ofrecemos sonido en vivo para bandas y orquestas, diseño de iluminación y bar móvil con nuestro aliado Lily's Experience. La Hora Loca está disponible bajo pedido.",
+          a: "Bodas, quinceañeras, cumpleaños, eventos corporativos, fiestas privadas y discotecas. También ofrecemos sonido en vivo para bandas y orquestas, y diseño de iluminación. La Hora Loca está disponible bajo pedido.",
         },
         {
           q: "¿En qué estilos de música se especializa Edison Arias?",
